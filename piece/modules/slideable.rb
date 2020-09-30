@@ -1,8 +1,3 @@
-require 'byebug'
-# require_relative "../rook/rook"
-# require_relative "../queen/queen"
-# require_relative "../bishop/bishop"
-
 module Slideable
   private 
   HORIZONTAL_DIRS = [[-1,0],[1,0],[0,-1],[0,1]]
@@ -43,6 +38,10 @@ module Slideable
       unblocked_moves << [x,y]
       x += dx
       y += dy
+    end
+    possible_enemy = [x,y]
+    if @board.valid_pos?(possible_enemy) && @board[possible_enemy].color == @board.opponent(self.color)
+      unblocked_moves << possible_enemy 
     end
     unblocked_moves
   end
