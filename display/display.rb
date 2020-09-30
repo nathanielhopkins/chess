@@ -42,8 +42,9 @@ class Display
         end
       end
 
-      puts "#{i} #{symbols.join(" ")}"
+      puts "#{8 - i} #{symbols.join(" ")} #{8 - i}"
     end
+     puts "  a b c d e f g h"
   end
 
   def get_cursor_input
