@@ -9,6 +9,7 @@ class Display
   def initialize
     @board = Board.new
     @cursor = Cursor.new([0,0],@board)
+    @selected = nil
   end
 
   def render
@@ -22,8 +23,10 @@ class Display
         end
       end
       symbols = symbols.each_with_index.map do |space, idx|
-        if [i,idx] == @cursor.cursor_pos
-           space.on_light_red
+        if [i,idx] == @selected
+          space.on_red
+        elsif [i,idx] == @cursor.cursor_pos
+          space.on_yellow
         elsif i.even?
           if idx.even?
             space.on_light_blue
@@ -52,7 +55,13 @@ class Display
       input = @cursor.get_input
     end
     system('clear')
+    toggle_selected
     render
     return @cursor.cursor_pos
+  end
+
+  private
+  def toggle_selected
+    @selected = @cursor.cursor_pos
   end
 end
