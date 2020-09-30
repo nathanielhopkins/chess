@@ -1,0 +1,8 @@
+require_relative "rook/rook"
+require_relative "knight/knight"
+require_relative "bishop/bishop"
+require_relative "queen/queen"
+require_relative "king/king"
+require_relative "pawn/pawn"
+require_relative "piece"
+require_relative "nullpiece/nullpiece"
