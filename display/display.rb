@@ -13,7 +13,7 @@ class Display
   end
 
   def render
-    puts "  0 1 2 3 4 5 6 7"
+    puts "  a b c d e f g h"
     @board.rows.each_with_index do |row, i|
       symbols = row.map do |piece| 
         if piece
