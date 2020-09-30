@@ -107,12 +107,21 @@ class Board
 
   def dup
     dup = Board.new
-    dup.copy_rows(@rows)
+    dup.deep_copy(@rows)
     dup
   end
 
-  def copy_rows(rows)
-    @rows = rows
+  def deep_copy(rows)
+    @rows.each_with_index do |row, row_idx|
+      row.each_with_index do |col, col_idx|
+        object = rows[row_idx][col_idx]
+        if object
+          self[[row_idx,col_idx]] = object.class.new(object.color,self,object.pos)
+        else
+          self[[row_idx,col_idx]] = nil
+        end
+      end
+    end
   end
 
   def move_piece!(color,start_pos,end_pos)
