@@ -68,7 +68,7 @@ class Board
 
   def checkmate?(color)
     player_pieces = pieces.select {|piece| piece.color == color}
-    no_valid_moves = player_pieces.none {|piece| piece.valid_moves #need to implement}
+    no_valid_moves = player_pieces.none {|piece| piece.valid_moves }
     in_check?(color) && no_valid_moves
   end
 
@@ -106,6 +106,13 @@ class Board
   end
 
   def dup
+    dup = Board.new
+    dup.copy_rows(@rows)
+    dup
+  end
+
+  def copy_rows(rows)
+    @rows = rows
   end
 
   def move_piece!(color,start_pos,end_pos)
