@@ -70,6 +70,11 @@ class Board
   end
 
   def in_check?(color)
+  
+  end
+
+  def opponent(color)
+    color == :white ? :black : :white
   end
 
   def find_king(color)
