@@ -17,7 +17,7 @@ module Slideable
     move_dirs.each do |move_dir|
       dx,dy = move_dir
       moves_in_dir = grow_unblocked_moves_in_dir(dx,dy)
-      moves << moves_in_dir if !moves_in_dir.empty?
+      moves += moves_in_dir if !moves_in_dir.empty?
     end
     moves
   end
