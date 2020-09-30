@@ -1,4 +1,5 @@
 require_relative "../piece/piece_requires"
+
 class Board
 
   def initialize
@@ -72,6 +73,16 @@ class Board
   end
 
   def find_king(color)
+    search = @rows.flatten
+    king_raw = nil
+    search.each_with_index do |square, i|
+      if square
+        king_raw = i if square.symbol == :K && square.color == color
+      end
+    end
+    x = king_raw / 8
+    y = king_raw - (8*x)
+    king_pos = [x,y]
   end
 
   def pieces
