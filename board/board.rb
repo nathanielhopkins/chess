@@ -70,7 +70,12 @@ class Board
   end
 
   def in_check?(color)
-  
+    enemy_pieces = pieces.select {|piece| piece.color == opponent(color)}
+    king_pos = find_king(color)
+    enemy_pieces.each do |enemy|
+      return true if enemy.moves.any? {|move| move == king_pos}
+    end
+    return false
   end
 
   def opponent(color)
