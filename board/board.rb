@@ -86,6 +86,9 @@ class Board
   end
 
   def pieces
+    pieces = []
+    @rows.flatten.each {|piece| pieces << piece if piece}
+    pieces
   end
 
   def dup
