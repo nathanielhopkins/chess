@@ -14,11 +14,7 @@ class Piece
   end
 
   def valid_moves
-    valid_moves = moves.select do |move|
-      duped = @board.dup
-      duped.move_piece(@pos,move)
-      duped.in_check?(@color) == false
-    end
+    valid_moves = moves.select {|move| move_into_check?(move) == false}
     valid_moves
   end
 
@@ -31,6 +27,9 @@ class Piece
   end
 
   def move_into_check?(end_pos)
+    duped = @board.dup
+    duped.move_piece!(@pos,end_pos)
+    duped.in_check?(@color)
   end
   attr_reader :pos, :color
 end
