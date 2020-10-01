@@ -51,9 +51,14 @@ class Board
     raise "No piece here" if self[start_pos].nil?
     raise "Cannot move here" if valid_pos?(end_pos) == false
     piece = self[start_pos]
-    piece.pos = end_pos
-    add_piece(piece, end_pos)
-    self[start_pos] = nil
+    raise "Cannot move here, would place you in check." if piece.move_into_check?(end_pos)
+    if piece.valid_moves.include?(end_pos)
+      piece.pos = end_pos
+      add_piece(piece, end_pos)
+      self[start_pos] = nil
+    else
+      raise "Not a valid move."
+    end
   end
 
   def valid_pos?(pos)
@@ -124,7 +129,13 @@ class Board
     end
   end
 
-  def move_piece!(color,start_pos,end_pos)
+  def move_piece!(start_pos,end_pos)
+    raise "No piece here" if self[start_pos].nil?
+    raise "Cannot move here" if valid_pos?(end_pos) == false
+    piece = self[start_pos]
+    piece.pos = end_pos
+    add_piece(piece, end_pos)
+    self[start_pos] = nil
   end
   attr_reader :rows
 end
