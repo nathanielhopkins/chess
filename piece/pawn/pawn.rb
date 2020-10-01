@@ -32,7 +32,7 @@ class Pawn < Piece
     if at_start_row?
       return [[(x+dx),y],[(x+(2*dx)),y]]
     else
-      return [(x+dx),y]
+      return [[(x+dx),y]]
     end
   end
   
