@@ -93,6 +93,7 @@ class Cursor
       update_pos(MOVES[:down])
       return nil
     when :space, :return
+      toggle_selected
       return @cursor_pos
     when :ctrl_c
       Process.exit(0)
@@ -104,5 +105,13 @@ class Cursor
     x,y = @cursor_pos
     new_cursor_pos = [(x + dx),(y + dy)]
     @cursor_pos = new_cursor_pos if @board.valid_pos?(new_cursor_pos)
+  end
+
+  def toggle_selected
+    if @selected == false
+      @selected = true
+    else
+      @selected = false
+    end
   end
 end
