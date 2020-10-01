@@ -30,17 +30,17 @@ module Slideable
     unblocked_moves = []
     x,y = @pos
     next_move = [(x + dx), (y + dy)]
-    if @board.valid_pos?(next_move) && @board[next_move] == nil
+    if @board.valid_pos?(next_move) && @board[next_move].class == NullPiece
       x += dx
       y += dy
     end
-    until @board.valid_pos?([x,y]) == false || @board[[x,y]] != nil
+    until @board.valid_pos?([x,y]) == false || @board[[x,y]].class != NullPiece
       unblocked_moves << [x,y]
       x += dx
       y += dy
     end
     possible_enemy = [x,y]
-    if @board.valid_pos?(possible_enemy) && @board[possible_enemy].color == @board.opponent(self.color)
+    if @board.valid_pos?(possible_enemy) && @board[possible_enemy].color != @color
       unblocked_moves << possible_enemy 
     end
     unblocked_moves

@@ -40,6 +40,6 @@ class Pawn < Piece
     x,y = @pos
     dx = x + forward_dir 
     attacks = [[dx,(y-1)],[dx,(y+1)]]
-    attacks.select {|attack| @board[attack] != nil && @board[attack].color != @color}
+    attacks.select {|attack| @board[attack] != nil && @board[attack].class != NullPiece && @board[attack].color != @color}
   end
 end

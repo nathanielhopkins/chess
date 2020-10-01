@@ -15,10 +15,10 @@ class Display
     puts "  a b c d e f g h"
     @board.rows.each_with_index do |row, i|
       symbols = row.map do |piece| 
-        if piece
+        if piece.class != NullPiece
           piece.to_s.colorize(piece.color)
         else
-          '_'.colorize(:light_blue)
+          piece.to_s.colorize(:light_blue)
         end
       end
       symbols = symbols.each_with_index.map do |space, idx|

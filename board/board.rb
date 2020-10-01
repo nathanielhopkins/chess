@@ -3,7 +3,7 @@ require_relative "../piece/piece_requires"
 class Board
 
   def initialize
-    @sentinel = NullPiece
+    @sentinel = NullPiece.instance
     @rows = Array.new(8) {Array.new(8)}
     set_board
   end
@@ -29,12 +29,12 @@ class Board
     self[[0,5]] = Bishop.new(:black,self,[0,5])
     self[[0,6]] = Knight.new(:black,self,[0,6])
     self[[0,7]] = Rook.new(:black,self,[0,7])
-    # #set nullpieces
-    # (2..5).each do |x|
-    #   (0..7).each do |y|
-    #     self[[x,y]] = @sentinel
-    #   end
-    # end
+    #set nullpieces
+    (2..5).each do |x|
+      (0..7).each do |y|
+        self[[x,y]] = @sentinel
+      end
+    end
   end
 
   def [](pos)
@@ -48,14 +48,14 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    raise "No piece here" if self[start_pos].nil?
+    raise "No piece here" if self[start_pos] == @sentinel
     raise "Cannot move here" if valid_pos?(end_pos) == false
     piece = self[start_pos]
     raise "Cannot move here, would place you in check." if piece.move_into_check?(end_pos)
     if piece.valid_moves.include?(end_pos)
       piece.pos = end_pos
       add_piece(piece, end_pos)
-      self[start_pos] = nil
+      self[start_pos] = @sentinel
     else
       raise "Not a valid move."
     end
@@ -120,22 +120,22 @@ class Board
     @rows.each_with_index do |row, row_idx|
       row.each_with_index do |col, col_idx|
         object = rows[row_idx][col_idx]
-        if object
-          self[[row_idx,col_idx]] = object.class.new(object.color,self,object.pos)
+        if object.class == NullPiece
+          self[[row_idx,col_idx]] = @sentinel
         else
-          self[[row_idx,col_idx]] = nil
+          self[[row_idx,col_idx]] = object.class.new(object.color,self,object.pos)
         end
       end
     end
   end
 
   def move_piece!(start_pos,end_pos)
-    raise "No piece here" if self[start_pos].nil?
+    raise "No piece here" if self[start_pos] == @sentinel
     raise "Cannot move here" if valid_pos?(end_pos) == false
     piece = self[start_pos]
     piece.pos = end_pos
     add_piece(piece, end_pos)
-    self[start_pos] = nil
+    self[start_pos] = @sentinel
   end
   attr_reader :rows
 end

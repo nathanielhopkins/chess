@@ -9,7 +9,7 @@ module Stepable
       dx,dy = move_dir
       move = [(x+dx),(y+dy)]
       if @board.valid_pos?(move)
-        if @board[move] == nil
+        if @board[move].class == NullPiece
           moves << move
         elsif @board[move].color != @color
           moves << move
