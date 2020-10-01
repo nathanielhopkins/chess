@@ -1,13 +1,13 @@
 require_relative "../display/display.rb"
-require_relative "../player/player.rb"
+require_relative "../player/human_player/human_player.rb"
 
 class Game
 
-  def initialize(players)
+  def initialize
     @board = Board.new
     @display = Display.new(@board)
-    @players = {Player1 = players[0], Player2 = players[1]}
-    @current_player = Player1
+    @players = {:white => HumanPlayer.new(:white,@display), :black => HumanPlayer.new(:black,@display)}
+    @current_player = @players[:white]
   end
 
   def play
@@ -19,5 +19,5 @@ class Game
   def swap_turn!
   end
 
-  attr_reader :board, :display
+  attr_reader :board, :display, :players
 end

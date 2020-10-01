@@ -4,5 +4,5 @@ class Player
     @color = color
     @display = display
   end
-
+  attr_reader :color, :display
 end
