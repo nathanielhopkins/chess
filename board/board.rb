@@ -73,7 +73,7 @@ class Board
 
   def checkmate?(color)
     player_pieces = pieces.select {|piece| piece.color == color}
-    no_valid_moves = player_pieces.none {|piece| piece.valid_moves }
+    no_valid_moves = player_pieces.none? {|piece| !piece.valid_moves.empty? }
     in_check?(color) && no_valid_moves
   end
 
