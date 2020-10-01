@@ -39,7 +39,11 @@ module Slideable
       x += dx
       y += dy
     end
-    possible_enemy = [x,y]
+    if unblocked_moves.empty?
+      possible_enemy = [(x+dx),(y+dy)]
+    else
+      possible_enemy = [x,y]
+    end
     if @board.valid_pos?(possible_enemy) && @board[possible_enemy].color != @color
       unblocked_moves << possible_enemy 
     end
