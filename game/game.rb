@@ -17,7 +17,12 @@ class Game
   end
 
   def swap_turn!
+    if @current_player == @players[:white]
+      @current_player = @players[:black]
+    else
+      @current_player = @players[:white]
+    end
   end
 
-  attr_reader :board, :display, :players
+  attr_reader :board, :display, :players, :current_player
 end
