@@ -58,6 +58,6 @@ class Display
     end
     system('clear')
     render
-    return @cursor.cursor_pos
+    return input
   end
 end
