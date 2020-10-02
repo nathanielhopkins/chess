@@ -12,6 +12,20 @@ class Game
 
   def play
   end
+  
+  def take_turn
+    @display.render
+    puts "Please select a piece"
+    start_pos = @current_player.make_move(@board)
+    puts "Please select a valid move."
+    end_pos = @current_player.make_move(@board)
+    @board.move_piece(start_pos,end_pos)
+    @display.cursor.reset_cursor
+    system("clear")
+    @display.render
+  rescue
+    raise "Not a valid move. (from game)"
+  end
 
   def notify_players
   end
