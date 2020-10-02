@@ -47,17 +47,4 @@ class Display
     end
      puts "  a b c d e f g h"
   end
-
-  def get_cursor_input
-    input = nil
-    render
-    until input != nil
-      system('clear')
-      render
-      input = @cursor.get_input
-    end
-    system('clear')
-    render
-    return input
-  end
 end
