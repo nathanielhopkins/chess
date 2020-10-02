@@ -107,11 +107,17 @@ class Cursor
     @cursor_pos = new_cursor_pos if @board.valid_pos?(new_cursor_pos)
   end
 
+public
   def toggle_selected
     if @selected == false
       @selected = true
     else
       @selected = false
     end
+  end
+
+  def reset_cursor
+    @selected = false
+    @cursor_pos = [0,0]
   end
 end
