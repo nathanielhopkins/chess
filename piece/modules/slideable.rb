@@ -12,7 +12,7 @@ module Slideable
     DIAGONAL_DIRS
   end
 
-  def moves #returns array of positions piece can move to
+  def moves 
     moves = []
     move_dirs.each do |move_dir|
       dx,dy = move_dir
@@ -22,10 +22,11 @@ module Slideable
     moves
   end
 
-  def move_dirs #overwritten by subclass
+  def move_dirs 
     super
   end
 
+  private
   def grow_unblocked_moves_in_dir(dx,dy)
     unblocked_moves = []
     x,y = @pos
