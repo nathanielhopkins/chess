@@ -44,6 +44,9 @@ class Game
     continue
     end_pos = @current_player.make_move(@board)
     unless @board[start_pos].valid_moves.include?(end_pos)
+      if @board.in_check?(@current_player.color)
+        raise ArgumentError.new "Cannot move here now. You are in check."
+      end
       raise ArgumentError.new "Not a valid move for that piece."
     end
     @board.move_piece(start_pos,end_pos)
