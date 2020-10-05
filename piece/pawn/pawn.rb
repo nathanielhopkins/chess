@@ -7,7 +7,8 @@ class Pawn < Piece
   end
 
   def moves
-    forward_steps + side_attacks
+    forward_moves = forward_steps.select { |step| @board[step].class == NullPiece }
+    forward_moves + side_attacks
   end
 
   def at_start_row?
