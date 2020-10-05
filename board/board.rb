@@ -8,6 +8,7 @@ class Board
     set_board
   end
 
+  private
   def set_board
     #set white
     (0..7).each {|y| self[[6,y]] = Pawn.new(:white,self,[6,y])}
@@ -37,6 +38,35 @@ class Board
     end
   end
 
+  def add_piece(piece,pos)
+    self[pos] = piece
+    piece.pos = pos
+  end
+
+  def pieces
+    pieces = []
+    @rows.flatten.each {|piece| pieces << piece if piece}
+    pieces
+  end
+
+  def opponent(color)
+    color == :white ? :black : :white
+  end
+
+  def find_king(color)
+    search = @rows.flatten
+    king_raw = nil
+    search.each_with_index do |square, i|
+      if square
+        king_raw = i if square.symbol == :K && square.color == color
+      end
+    end
+    x = king_raw / 8
+    y = king_raw - (8*x)
+    king_pos = [x,y]
+  end
+
+  public
   def [](pos)
     x,y = pos
     @rows[x][y]
@@ -66,11 +96,6 @@ class Board
     x.between?(0,7) && y.between?(0,7)
   end
 
-  def add_piece(piece,pos)
-    self[pos] = piece
-    piece.pos = pos
-  end
-
   def checkmate?(color)
     player_pieces = pieces.select {|piece| piece.color == color}
     no_valid_moves = player_pieces.none? {|piece| !piece.valid_moves.empty? }
@@ -85,29 +110,6 @@ class Board
       return true if enemy.moves.any? {|move| move == king_pos}
     end
     return false
-  end
-
-  def opponent(color)
-    color == :white ? :black : :white
-  end
-
-  def find_king(color)
-    search = @rows.flatten
-    king_raw = nil
-    search.each_with_index do |square, i|
-      if square
-        king_raw = i if square.symbol == :K && square.color == color
-      end
-    end
-    x = king_raw / 8
-    y = king_raw - (8*x)
-    king_pos = [x,y]
-  end
-
-  def pieces
-    pieces = []
-    @rows.flatten.each {|piece| pieces << piece if piece}
-    pieces
   end
 
   def dup
