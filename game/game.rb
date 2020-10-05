@@ -44,8 +44,8 @@ class Game
     continue
     end_pos = @current_player.make_move(@board)
     unless @board[start_pos].valid_moves.include?(end_pos)
-      if @board.in_check?(@current_player.color)
-        raise ArgumentError.new "Cannot move here now. You are in check."
+      if @board[start_pos].move_into_check?(end_pos)
+        raise ArgumentError.new "Cannot leave your king in check."
       end
       raise ArgumentError.new "Not a valid move for that piece."
     end
