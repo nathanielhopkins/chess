@@ -10,9 +10,6 @@ class Piece
     symbol.to_s
   end
 
-  def empty?
-  end
-
   def valid_moves
     valid_moves = moves.select {|move| move_into_check?(move) == false}
     valid_moves
