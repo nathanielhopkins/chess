@@ -8,8 +8,8 @@ class Queen < Piece
     :Q
   end
 
+  protected
   def move_dirs 
-    # protected
     move_dirs = horizontal_dirs + diagonal_dirs
   end
 end
