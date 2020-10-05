@@ -8,8 +8,8 @@ class Bishop < Piece
     :B
   end
 
+  protected
   def move_dirs 
-    # protected
     move_dirs = diagonal_dirs
   end
 end
