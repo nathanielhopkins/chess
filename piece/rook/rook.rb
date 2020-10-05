@@ -8,8 +8,8 @@ class Rook < Piece
     :R
   end
 
+  protected
   def move_dirs
-    # protected
     move_dirs = horizontal_dirs
   end
 end
